@@ -1,8 +1,8 @@
-﻿
+
 #include <iostream>
 #include "Vector.h"
 
-using namespace std;
+
 
 int main()
 {
@@ -11,27 +11,27 @@ int main()
 	Vector v3 = v2;
 
 	for (int i = 0; i < v1.size(); i++)
-		cout << v1[i] << endl;
+		std::cout << v1[i] << std::endl;
 
 	if (v1 > v3)
-		cout << "v1 is big\n";
+		std::cout << "v1 is big\n";
 	else
-		"v3 is big\n";
+		std::cout << "v3 is big\n";
 
 	if (v2 == v3)
-		cout << "equal\n";
+		std::cout << "equal\n";
 	else
-		"not equal\n";
+		std::cout << "not equal\n";
 
 	if (v1 != v3)
-		cout << "not equal\n";
+		std::cout << "not equal\n";
 	else
-		"equal\n";
+		std::cout <<"equal\n";
 
 	if (v2.empty())
-		cout << "empty\n";
+		std::cout << "empty\n";
 	else
-		"not empty\n";
+		std::cout << "not empty\n";
 
 
 	return 0;
