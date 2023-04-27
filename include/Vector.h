@@ -14,9 +14,9 @@ class Vector {
 		Vector(Vector&& other) noexcept;
 		Vector& operator=(const Vector& other);
 		std::strong_ordering operator<=>(const Vector& other) const noexcept;
-		int& operator[](const int index);
+		int& operator[](int index);
 		const int& operator[](const int index) const;
-		const bool& operator==(const Vector& other) const noexcept;
+		bool operator==(const Vector& other) const noexcept;
 		const bool& operator!=(const Vector& other) const noexcept;
 		void swap(Vector& other) noexcept;
 		int* data() const;
@@ -25,7 +25,7 @@ class Vector {
 		int capacity() const;
 		void clear();
 		void reserve(size_t capacity);
-		void resize(int size, int value);
+		void resize(size_t  size, size_t  value);
 		void push_back(int&& value);
 		void pop_back();
 		void insert(size_t index, int value);
