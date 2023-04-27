@@ -1,4 +1,4 @@
-#include "..\include\vector.h"
+#include "vector.h"
 
 /**
 	* @brief Constructs a new Vector with a given size and value for all elements.
@@ -7,7 +7,7 @@
 	*/
 Vector::Vector(size_t size, int value) : m_size(size), m_capacity(size), m_value(new int[size])
 {
-	for (int i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++)
 		m_value[i] = value;
 }
 
@@ -36,7 +36,6 @@ Vector::Vector(const Vector& other) : m_size(other.m_size), m_capacity(other.m_c
 Vector::Vector(Vector&& other) noexcept : m_size(other.m_size), m_capacity(other.m_capacity), m_value(other.m_value)
 {
 	other.m_size = 0;
-	other.m_capacity = 0;
 	other.m_value = nullptr;
 }
 
@@ -101,7 +100,7 @@ int& Vector::operator[](const int index)
    * @throws std::out_of_range if the index is out of bounds.
    */
 
-const int& Vector::operator[](const int index) const
+int Vector::operator[](int index) const
 {
 	if (index >= m_size)
 	{
@@ -117,7 +116,7 @@ const int& Vector::operator[](const int index) const
 	 * @return True if the Vectors are equal, false otherwise.
 	 */
 
-const bool& Vector::operator==(const Vector& other) const noexcept
+bool Vector::operator==(const Vector& other) const noexcept
 {
 	if (other.m_size != m_size)
 		return false;
@@ -194,8 +193,8 @@ int Vector::capacity() const
 */
 void Vector::clear()
 {
+	delete[] m_value;
 	m_size = 0;
-	m_capacity = 0;
 	m_value = nullptr;
 }
 
@@ -212,7 +211,7 @@ void Vector::reserve(size_t capacity)
 	int* new_value = new int[capacity];
 
 	for (size_t i = 0; i < m_size; ++i) {
-		new_value[i] = std::move(m_value[i]);
+		new_value[i] = m_value[i];
 	}
 
 	delete[] m_value;
@@ -226,7 +225,7 @@ void Vector::reserve(size_t capacity)
 * @param size The new size of the vector.
 * @param value The value to fill the new elements with.
 */
-void Vector::resize(int size, int value)
+void Vector::resize(size_t size, size_t value)
 {
 	if (size > m_size) {
 		if (size > m_capacity) {
@@ -275,7 +274,6 @@ void Vector::pop_back()
 */
 void Vector::insert(size_t index, int value)
 {
-	try {
 		if (index > m_size) {
 			throw std::out_of_range("index out of range");
 		}
@@ -292,10 +290,7 @@ void Vector::insert(size_t index, int value)
 		m_value[index] = value;
 
 		m_size++;
-	}
-	catch (const std::out_of_range& e) {
-		std::cout << "Exception caught: " << e.what() << std::endl;
-	}
+	
 }
 
 /**
@@ -303,7 +298,6 @@ void Vector::insert(size_t index, int value)
 */
 void Vector::erase(int index)
 {
-	try {
 		if (index >= m_size) {
 			throw std::out_of_range("index out of range");
 		}
@@ -314,8 +308,4 @@ void Vector::erase(int index)
 		}
 
 		m_size--;
-	}
-	catch (const std::out_of_range& e) {
-		std::cout << e.what() << std::endl;
-	}
 }
